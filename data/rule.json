@@ -1,0 +1,70 @@
+{
+  "rules": [
+    {
+      "rule_name": "식신생재격",
+      "priority": 10,
+      "conditions": {
+        "AND": [
+          { "custom_condition": "is_siksinsaengjae" },
+          { "custom_condition": "is_jaeseong_real" }
+        ]
+      },
+      "result": "사업, 경영 등을 통해 재물을 획득하는 구조입니다. 정상적이고 꾸준한 재물 흐름을 보입니다."
+    },
+    {
+      "rule_name": "재통관",
+      "priority": 10,
+      "conditions": {
+        "AND": [
+          ["재성_강도", "<", 1],
+          ["관살_강도", ">", 1],
+          { "custom_condition": "is_gwansal_controlled" }
+        ]
+      },
+      "result": "재물을 권력, 관직, 명예로 전환하여 사용하는 구조입니다. 현실적인 부와 사회적 성공을 모두 추구합니다."
+    },
+    {
+      "rule_name": "녹재격",
+      "priority": 8,
+      "conditions": {
+        "AND": [
+          ["십신_개수.재성", "==", 0],
+          ["십신_개수.식상", "==", 0],
+          { "custom_condition": "is_ilgan_rok_real" }
+        ]
+      },
+      "result": "자신의 노동력과 본연의 복록(의식주)을 통해 안정적인 생계를 유지하는 구조입니다."
+    },
+    {
+      "rule_name": "허상 판정",
+      "priority": 1,
+      "conditions": {
+        "AND": [
+          ["is_heotu", "==", true],
+          ["has_connections", "==", false]
+        ]
+      },
+      "result": "허상(虛象)으로, 실제 현실적인 작용은 미미하고 주로 감정이나 상상에 그칠 가능성이 높습니다."
+    },
+    {
+      "rule_name": "재성강함",
+      "priority": 5,
+      "conditions": {
+        "AND": [
+          ["재성_실상", "==", true],
+          { "custom_condition": "is_jaeseong_strong" }
+        ]
+      },
+      "result": "재성이 강하게 실상으로 작용합니다.",
+      "explanation_template": "재성 강도({재성_강도})가 높아 실제 큰 재물로 작용할 가능성이 있습니다."
+    },
+    {
+      "rule_name": "관살혼잡_어려움",
+      "priority": 5,
+      "conditions": {
+        "custom_condition": "is_gwansal_honjap"
+      },
+      "result": "정관과 편관이 함께 있어 목표 설정에 혼란이 오거나, 직장 및 대인관계에서 스트레스가 많을 수 있습니다."
+    }
+  ]
+}

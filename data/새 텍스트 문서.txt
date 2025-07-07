@@ -1,0 +1,48 @@
+def judge_image_status(components: dict) -> str:
+    """
+    [용도]
+    - 사주 구조 내 십신(十神) 또는 특정 오행의 작용이 '실상(實象)'인지 '허상(虛象)'인지, 혹은 아예 미작용(No image)인지 판별.
+    - 수리 명리의 '투과(透)'와 '합/생/록/입묘/帶象' 연결성 원칙을 따름.
+
+    [입력]
+    - components: dict
+        {
+            "透": True/False,      # EXPOSED(透): 천간에 드러남
+            "合": True/False,      # COMBINE(合): 합의 작용
+            "生": True/False,      # GENERATE_IMAGE(生): 생(상생) 작용
+            "祿": True/False,      # 祿(록): 일간의 힘/근거
+            "入墓": True/False,    # ENTER_TOMB(入墓): 입묘
+            "帶象": True/False,    # CARRY_IMAGE(帶象): 기운을 지님
+            # (확장 필요시 기타 요소 추가)
+        }
+
+    [반환]
+    - "REAL_IMAGE"     : 실상(實象, 실제 현실 작용)
+    - "VIRTUAL_IMAGE"  : 허상(虛象, 현실 작용X/상상/감정에 그침)
+    - "NO_IMAGE"       : 투과조차 없으면 미작용
+    """
+
+    # 투과(透) 있으면 실상/허상 판정
+    if components.get("透", False):
+        # 합/생/록/입묘/帶象 등 하나라도 있으면 실상
+        if any([
+            components.get("合", False),
+            components.get("生", False),
+            components.get("祿", False),
+            components.get("入墓", False),
+            components.get("帶象", False)
+        ]):
+            return "REAL_IMAGE"    # 실상
+        else:
+            return "VIRTUAL_IMAGE" # 허상 (투과만 있음)
+    # 투과(透)조차 없으면
+    return "NO_IMAGE"              # 미작용
+
+# ===== 사용 예시 =====
+ex1 = {"透": True, "合": True, "生": False}      # 투과+합 → 실상
+ex2 = {"透": True, "合": False, "生": False}     # 투과만 → 허상
+ex3 = {"透": False, "合": False, "生": True}     # 투과X → 미작용
+
+print(judge_image_status(ex1))  # 'REAL_IMAGE'
+print(judge_image_status(ex2))  # 'VIRTUAL_IMAGE'
+print(judge_image_status(ex3))  # 'NO_IMAGE'
