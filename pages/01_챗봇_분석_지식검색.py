@@ -3,8 +3,8 @@ import pandas as pd
 import json
 import re
 import os
-from block_parser import parse_file_to_blocks
-from util import blocks_to_df, save_blocks
+from modules.parsers import parse_file_to_blocks
+from modules.util import blocks_to_df, save_blocks
 
 st.title("① 문서/파일 업로드 + 챗봇/질문/지식검색")
 
