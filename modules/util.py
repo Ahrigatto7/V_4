@@ -1,5 +1,13 @@
-import re
+import pandas as pd
 import json
+import re
+
+def blocks_to_df(blocks):
+    return pd.DataFrame(blocks)
+
+def save_blocks(blocks, path):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(blocks, f, ensure_ascii=False, indent=2)
 
 def txt_to_json(txt_path, json_path):
     """#으로 시작하는 구문을 키로 삼아 JSON(문단별/제목별)으로 변환"""
